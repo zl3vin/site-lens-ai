@@ -51,110 +51,100 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-[#f7f7f2] text-[#20241f]">
-      <div className="mx-auto max-w-3xl px-5 py-12 md:py-20">
-        <header className="mb-12">
-          <div className="mb-8 flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#315c45] text-sm font-bold text-white">
+    <main className="min-h-screen bg-[#faf9f5] text-[#1f231e]">
+      <div className="mx-auto max-w-[640px] px-6 py-16 md:py-24">
+        <header className="mb-14 flex flex-col items-center text-center">
+          <div className="mb-6 flex items-center gap-2.5">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#3a6650] text-xs font-bold text-white">
               S
             </div>
-
-            <div>
-              <div className="font-semibold">SiteLens AI</div>
-              <div className="text-xs text-[#70766e]">
-                Search & AI Readiness Audit
-              </div>
-            </div>
+            <span className="text-sm font-medium tracking-wide text-[#3a6650]">
+              SiteLens AI
+            </span>
           </div>
 
-          <h1 className="max-w-2xl text-3xl font-semibold tracking-tight md:text-4xl">
-            Wie gut ist deine Website für Suche & KI aufgestellt?
+          <h1 className="max-w-md text-[28px] font-semibold leading-tight tracking-tight text-[#1a1d18] md:text-[34px]">
+            Website-Audit für Suche & KI
           </h1>
 
-          <p className="mt-3 max-w-xl text-[#697068]">
-            Gib eine URL ein. SiteLens AI prüft wichtige technische,
-            inhaltliche und strukturierte Signale deiner Startseite.
+          <p className="mt-4 max-w-sm text-[15px] leading-6 text-[#6b7168]">
+            Analysiere zentrale technische, strukturelle und inhaltliche
+            Signale deiner Website.
           </p>
         </header>
 
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col gap-3 rounded-2xl border border-[#dedfd8] bg-white p-3 shadow-sm sm:flex-row"
+          className="flex flex-col gap-2.5 rounded-2xl border border-[#e5e3d8] bg-white p-2.5 shadow-[0_1px_2px_rgba(20,20,10,0.04)] sm:flex-row"
         >
           <input
             type="text"
             value={url}
             onChange={(event) => setUrl(event.target.value)}
-            placeholder="z. B. example.com"
+            placeholder="deine-website.de"
             disabled={loading}
             required
-            className="min-w-0 flex-1 rounded-xl border border-transparent bg-[#f6f6f2] px-4 py-3 outline-none transition focus:border-[#315c45]"
+            className="min-w-0 flex-1 rounded-xl border border-transparent bg-[#f6f5ef] px-4 py-3 text-[15px] outline-none transition focus:border-[#3a6650] focus:bg-white"
           />
 
           <button
             type="submit"
             disabled={loading}
-            className="rounded-xl bg-[#315c45] px-6 py-3 font-medium text-white transition hover:bg-[#274b38] disabled:cursor-not-allowed disabled:opacity-60"
+            className="rounded-xl bg-[#3a6650] px-6 py-3 text-[15px] font-medium text-white transition hover:bg-[#2f5441] disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {loading ? "Analysiere..." : "Analysieren"}
+            {loading ? "Analysiere…" : "Analysieren"}
           </button>
         </form>
 
         {loading && (
-          <p className="mt-4 text-sm text-[#70766e]">
-            Website wird analysiert ...
+          <p className="mt-5 text-center text-sm text-[#8b9086]">
+            Website wird analysiert …
           </p>
         )}
 
         {error && (
-          <div className="mt-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          <div className="mt-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-center text-sm text-red-700">
             {error}
           </div>
         )}
 
         {result && (
-          <section className="mt-10 space-y-6">
-            <div className="rounded-2xl border border-[#dedfd8] bg-white p-6 shadow-sm md:p-8">
-              <p className="mb-6 break-all text-sm text-[#747a73]">
+          <section className="mt-14 space-y-5">
+            <div className="rounded-2xl border border-[#e5e3d8] bg-white p-8">
+              <p className="mb-8 break-all text-center text-xs tracking-wide text-[#9a9d92]">
                 {result.url}
               </p>
 
-              <div className="flex flex-col items-center justify-between gap-8 sm:flex-row">
+              <div className="flex flex-col items-center">
                 <div
-                  className="flex h-40 w-40 items-center justify-center rounded-full"
+                  className="flex h-36 w-36 items-center justify-center rounded-full"
                   style={{
-                    background: `conic-gradient(#315c45 ${
+                    background: `conic-gradient(#3a6650 ${
                       result.overallScore * 3.6
-                    }deg, #e8ebe5 0deg)`,
+                    }deg, #ece9dd 0deg)`,
                   }}
                 >
-                  <div className="flex h-32 w-32 flex-col items-center justify-center rounded-full bg-white">
-                    <span className="text-4xl font-semibold">
+                  <div className="flex h-[104px] w-[104px] flex-col items-center justify-center rounded-full bg-white">
+                    <span className="text-3xl font-semibold text-[#1a1d18]">
                       {result.overallScore}
                     </span>
-                    <span className="text-sm text-[#737970]">von 100</span>
+                    <span className="text-xs text-[#9a9d92]">von 100</span>
                   </div>
                 </div>
 
-                <div className="flex-1 text-center sm:text-left">
-                  <p className="text-sm font-medium text-[#315c45]">
-                    Gesamtbewertung
-                  </p>
+                <h2 className="mt-5 text-lg font-semibold text-[#1a1d18]">
+                  {scoreLabel(result.overallScore)}
+                </h2>
 
-                  <h2 className="mt-2 text-2xl font-semibold">
-                    {scoreLabel(result.overallScore)}
-                  </h2>
-
-                  <p className="mt-2 text-sm leading-6 text-[#6e746c]">
-                    Der Score fasst die sechs geprüften Bereiche deiner
-                    Startseite zusammen.
-                  </p>
-                </div>
+                <p className="mt-1.5 max-w-xs text-center text-sm leading-6 text-[#8b9086]">
+                  Zusammenfassung der sechs geprüften Bereiche deiner
+                  Startseite.
+                </p>
               </div>
             </div>
 
-            <div className="rounded-2xl border border-[#dedfd8] bg-white p-6 shadow-sm md:p-8">
-              <h2 className="mb-6 text-lg font-semibold">
+            <div className="rounded-2xl border border-[#e5e3d8] bg-white p-8">
+              <h2 className="mb-6 text-[13px] font-semibold uppercase tracking-wide text-[#8b9086]">
                 Audit-Bereiche
               </h2>
 
@@ -162,18 +152,18 @@ export default function Home() {
                 {result.categories.map((category) => (
                   <div key={category.key}>
                     <div className="mb-2 flex items-center justify-between gap-4">
-                      <span className="text-sm font-medium">
+                      <span className="text-sm text-[#3a3e37]">
                         {category.label}
                       </span>
 
-                      <span className="text-sm font-semibold">
-                        {category.score}%
+                      <span className="text-sm font-semibold text-[#1a1d18]">
+                        {category.score}
                       </span>
                     </div>
 
-                    <div className="h-2 overflow-hidden rounded-full bg-[#e8ebe5]">
+                    <div className="h-[5px] overflow-hidden rounded-full bg-[#ece9dd]">
                       <div
-                        className="h-full rounded-full bg-[#315c45] transition-all"
+                        className="h-full rounded-full bg-[#3a6650] transition-all"
                         style={{ width: `${category.score}%` }}
                       />
                     </div>
@@ -182,27 +172,22 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-[#dedfd8] bg-white p-6 shadow-sm md:p-8">
-              <div className="mb-5">
-                <p className="text-sm font-medium text-[#315c45]">
-                  Nächste Schritte
-                </p>
-                <h2 className="mt-1 text-xl font-semibold">
-                  Wichtigste Empfehlungen
-                </h2>
-              </div>
+            <div className="rounded-2xl border border-[#e5e3d8] bg-white p-8">
+              <h2 className="mb-6 text-[13px] font-semibold uppercase tracking-wide text-[#8b9086]">
+                Empfehlungen
+              </h2>
 
               <div className="space-y-3">
                 {result.recommendations.map((recommendation, index) => (
                   <div
                     key={`${recommendation}-${index}`}
-                    className="flex gap-4 rounded-xl border border-[#e3e4de] p-4"
+                    className="flex gap-3.5 rounded-xl border border-[#ece9dd] px-4 py-3.5"
                   >
-                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#edf2ed] text-xs font-semibold text-[#315c45]">
+                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#eef2ec] text-[11px] font-semibold text-[#3a6650]">
                       {index + 1}
                     </div>
 
-                    <p className="text-sm leading-6 text-[#4e554d]">
+                    <p className="text-sm leading-6 text-[#3a3e37]">
                       {recommendation}
                     </p>
                   </div>
@@ -210,7 +195,7 @@ export default function Home() {
               </div>
             </div>
 
-            <p className="px-4 text-center text-xs leading-5 text-[#858a83]">
+            <p className="px-4 pt-2 text-center text-xs leading-5 text-[#9a9d92]">
               SiteLens AI bewertet technische und inhaltliche
               Readiness-Signale. Der Audit misst keine tatsächlichen Rankings
               oder Erwähnungen in ChatGPT, Gemini oder anderen KI-Systemen.
